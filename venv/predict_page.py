@@ -8,11 +8,16 @@ def load_model():
         data = pickle.load(file)
     return data
 
+
 data = load_model()
 
 regressor = data["model"]
 le_country = data["le_country"]
 le_education = data["le_education"]
+
+currency = ""
+salaryConverted = 0
+
 
 def show_predict_page():
     st.title("Software Developer Salary Prediction")
@@ -50,10 +55,17 @@ def show_predict_page():
 
     ok = st.button("Calculate Salary")
     if ok:
-        X = np.array([[country, education, expericence ]])
-        X[:, 0] = le_country.transform(X[:,0])
-        X[:, 1] = le_education.transform(X[:,1])
+        X = np.array([[country, education, expericence]])
+        X[:, 0] = le_country.transform(X[:, 0])
+        X[:, 1] = le_education.transform(X[:, 1])
         X = X.astype(float)
-
         salary = regressor.predict(X)
-        st.subheader(f"The estimated salary is ${salary[0]:.2f}")
+        if country == "India":
+            currency = "₹"
+            # salary[0]: .2f
+            salaryConverted = int(81.98*salary[0])
+        else:
+            currency = "$"
+            salaryConverted = int(salary[0])
+        st.subheader(
+            f"The estimated salary is {currency} {salaryConverted}")

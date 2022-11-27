@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import altair as alt
+
 
 def shorten_categories(categories, cutoff):
     categorical_map = {}
@@ -13,7 +15,7 @@ def shorten_categories(categories, cutoff):
 
 
 def clean_experience(x):
-    if x ==  'More than 50 years':
+    if x == 'More than 50 years':
         return 50
     if x == 'Less than 1 year':
         return 0.5
@@ -50,27 +52,25 @@ def load_data():
     df = df.rename({"ConvertedComp": "Salary"}, axis=1)
     return df
 
+
 df = load_data()
 
-def show_explore_page():
-    st.title("Explore Software Engineer Salaries")
 
-    st.write(
-        """
-    ### Stack Overflow Developer Survey 2020
-    """
-    )
+def show_explore_page():
+    st.write("""## Explore Software Engineer Salaries""")
 
     data = df["Country"].value_counts()
 
     fig1, ax1 = plt.subplots()
-    ax1.pie(data, labels=data.index, autopct="%1.1f%%", shadow=True, startangle=90)
-    ax1.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax1.pie(data, labels=data.index, autopct="%1.1f%%",
+            shadow=True, startangle=90)
+    # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax1.axis("equal")
 
     st.write("""#### Number of Data from different countries""")
 
     st.pyplot(fig1)
-    
+
     st.write(
         """
     #### Mean Salary Based On Country
@@ -86,6 +86,9 @@ def show_explore_page():
     """
     )
 
-    data = df.groupby(["YearsCodePro"])["Salary"].mean().sort_values(ascending=True)
+    data = df.groupby(["YearsCodePro"])[
+        "Salary"].mean().sort_values(ascending=True)
     st.line_chart(data)
 
+    # chart = alt.Chart(data).mark_circle().encode(x=["Country"], y=["Salary"])
+    # st.altair_chart(chart)

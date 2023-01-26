@@ -19,8 +19,9 @@ le_education = data["le_education"]
 currency = ""
 salaryConverted = 0
 
-
 # @st.cache
+
+
 def show_predict_page():
     st.write("""## Software Developer Salary Prediction""")
 
@@ -77,3 +78,8 @@ def show_predict_page():
         st.subheader(
             f"The estimated salary is {currency} {salaryConverted}")
         st.write("Inputs :", inputs)
+        st.success('Are you satisfied with the results ?', icon="😃")
+        success = st.button("Yes ✅")
+        fail = st.button("No 😳")
+        if (success):
+            st.balloons()

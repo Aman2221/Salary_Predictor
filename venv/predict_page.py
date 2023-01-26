@@ -5,7 +5,7 @@ import numpy as np
 
 # @st.cache
 def load_model():
-    with open('saved_steps.pkl', 'rb') as file:
+    with open('./saved_steps.pkl', 'rb') as file:
         data = pickle.load(file)
     return data
 

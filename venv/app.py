@@ -12,7 +12,7 @@ from login_page import login
 isLogin = True
 if (isLogin):
     page = st.sidebar.selectbox(
-        "Explore Or Predict", ("Predict", "Explore", "View Data", "login"))
+        "Explore Or Predict", ("Predict", "Explore", "View Data", "Login"))
 else:
     page = st.sidebar.selectbox("Login page", ("Login",))
 
@@ -21,6 +21,8 @@ if (isLogin):
         show_predict_page()
     elif page == "View Data":
         show_data()
+    elif page == "Login":
+        login()
     else:
         show_explore_page()
 else:
@@ -28,4 +30,4 @@ else:
 
 
 st.caption(
-    "Support us by either reporting this problem for bad  formatting or buying a coffee!")
+    "Support me by either reporting problem for bad formatting or buying a coffee, Aman Singh!")

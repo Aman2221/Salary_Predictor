@@ -17,10 +17,32 @@ import pandas as pd
 
 
 def login():
-    email = st.text_input("Email")
-    password = st.text_input("Password", type="password")
-    isWarning = st.button("Feedback")
-    if (isWarning):
-        # st.warning('This is a warning', icon="⚠️")
-        st.balloons()
-        # st.write(isWarning, fail)
+
+    tab1, tab2 = st.tabs(["LOGIN", "SIGNUP", ])
+
+    with tab1:
+        email = st.text_input("Email")
+        password = st.text_input("Password", type="password")
+        isLogin = st.button("Login", type="primary")
+        if isLogin == True:
+            if len(email) == 0 or len(password) == 0:
+                st.warning('Please fill all fields properly', icon="⚠️")
+    with tab2:
+        name = st.text_input("Name")
+        new_email = st.text_input("Email", key="Your email")
+        new_password = st.text_input(
+            "Password", key="Your password",  type="password")
+        isSignup = st.button("Sign up", type="primary")
+        if isSignup == True:
+            if len(name) == 0 or len(new_email) == 0 or len(new_password):
+                st.warning('Please fill all fields properly', icon="⚠️")
+    # with col1:
+    #     isLogin = st.button("Login")
+
+    # with col2:
+    #     isSignup = st.button("Sign up")
+
+    # if (isWarning):
+    # st.warning('This is a warning', icon="⚠️")
+    # st.balloons()
+    # st.write(isWarning, fail)

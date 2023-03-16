@@ -52,8 +52,8 @@ def show_predict_page():
         "Post grad",
     )
 
-    country = st.selectbox("Country", countries)
-    education = st.selectbox("Education Level", education)
+    country = st.selectbox("Country", countries, key=3)
+    education = st.selectbox("Education Level", education, key=4)
 
     experience = st.slider("Years of Experience", 0, 50, 3)
 

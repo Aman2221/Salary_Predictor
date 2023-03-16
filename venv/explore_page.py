@@ -2,6 +2,17 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import altair as alt
+from st_aggrid import AgGrid
+import pandas as pd
+import pickle as pkl
+
+# with open("file.pkl", "rb") as f:
+#     object = pkl.load(f)
+    
+# df = pd.DataFrame(object)
+# df.to_csv(r'file.csv')
+# newDf = pd.read_csv('survey_results_public.csv')
+
 
 
 def shorten_categories(categories, cutoff):
@@ -57,38 +68,52 @@ df = load_data()
 
 
 def show_explore_page():
+    
     st.write("""## Explore Software Engineer Salaries""")
-
+    
     data = df["Country"].value_counts()
 
     fig1, ax1 = plt.subplots()
     ax1.pie(data, labels=data.index, autopct="%1.1f%%",
-            shadow=True, startangle=90)
+        shadow=True, startangle=90)
     # Equal aspect ratio ensures that pie is drawn as a circle.
     ax1.axis("equal")
 
-    st.write("""#### Number of Data from different countries""")
+    option = st.selectbox(
+            "Select chart", ("Line chart", "Pie chart", "Bar chart","Tabular view"), key=2)
 
-    st.pyplot(fig1)
+    if option == "Pie chart":
+        st.write("""#### Number of Data from different countries""")
+        st.pyplot(fig1)
 
-    st.write(
-        """
-    #### Mean Salary Based On Country
-    """
-    )
+    elif option == "Bar chart":
+        st.write("""#### Mean Salary Based On Country""")
 
-    data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
-    st.bar_chart(data)
+        data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
+        st.bar_chart(data)
 
-    st.write(
-        """
-    #### Mean Salary Based On Experience
-    """
-    )
+    elif option == "Line chart":
+        st.write("""#### Mean Salary Based On Experience""")
 
-    data = df.groupby(["YearsCodePro"])[
-        "Salary"].mean().sort_values(ascending=True)
-    st.line_chart(data)
+        data = df.groupby(["YearsCodePro"])[
+            "Salary"].mean().sort_values(ascending=True)
+        st.line_chart(data)
+    elif option == "Tabular view":
+        data = pd.read_csv("./survey_results_public.csv")
+        st.dataframe(data)
+        
+    else :
+        st.write("""#### Mean Salary Based On Experience""")
+
+        data = df.groupby(["YearsCodePro"])[
+            "Salary"].mean().sort_values(ascending=True)
+        st.line_chart(data)
+
+    
+
+   
+
+  
 
     # chart = alt.Chart(data).mark_circle().encode(x=["Country"], y=["Salary"])
     # st.altair_chart(chart)

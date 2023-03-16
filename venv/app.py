@@ -9,12 +9,22 @@ from login_page import login
 #     page_icon='asset/logo.png'
 # )
 
+#tem code
+
+# if (True):
+#     page = st.sidebar.selectbox(
+#         "Explore", ("View Data",""))
+    
+    
+# if  page == "View Data":
+#     show_data()
+
 isLogin = True
 if (isLogin):
     page = st.sidebar.selectbox(
-        "Explore Or Predict", ("Predict", "Explore", "View Data", "Login"))
+        "Explore Or Predict", ("Predict", "Explore", "View Data", "Login"), key=0)
 else:
-    page = st.sidebar.selectbox("Login page", ("Login",))
+    page = st.sidebar.selectbox("Login or signup", ("Login",), key=1)
 
 if (isLogin):
     if page == "Predict":

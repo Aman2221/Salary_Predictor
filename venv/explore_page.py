@@ -100,7 +100,11 @@ def show_explore_page():
         st.line_chart(data)
     elif option == "Tabular view":
         data = pd.read_csv("./survey_results_public.csv")
-        st.dataframe(data)
+        top = data.head(1)
+        bottom = data.tail(100)
+        concatenated = pd.concat([top,bottom])
+
+        st.dataframe(concatenated)
         
     else :
         st.write("""#### Mean Salary Based On Experience""")

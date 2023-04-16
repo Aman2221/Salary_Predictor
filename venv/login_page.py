@@ -9,24 +9,8 @@ from firebase_admin import credentials
 cred = credentials.Certificate("./firebase-adminsdk.json")
 
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://console.firebase.google.com/project/msc-it-python/database'
+   "databaseURL": "https://msc-it-python-default-rtdb.firebaseio.com"
 })
-
-
-# from firebase_admin import firestore
-
-# firebase_config = {
-#     "apiKey": "AIzaSyAUA8KxjPCcgmyc5Q2_eo2bQ9jn5UZIjcY",
-#     "authDomain": "msc-it-python.firebaseapp.com",
-#     "projectId": "msc-it-python",
-#     "storageBucket": "msc-it-python.appspot.com",
-#     "messagingSenderId": "106638161647",
-#     "appId": "1:106638161647:web:1c23d156468c7f04de0d1a",
-#     "measurementId": "G-GTMC3296PB"
-# }
-
-# auth.initialize_app(firebase_config)
-
 
 def login():
 

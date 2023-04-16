@@ -14,8 +14,9 @@ import numpy as np
 #     file_name = "saved_steps.pkl"
 
 def load_model():
-    with open('saved_steps.pkl', 'rb') as file:
-        data = pickle.load(file)
+    #with open('saved_steps.pkl', 'rb') as file:
+    #    data = pickle.load(file)
+    data = pickle.load(open('saved_steps.pkl', 'rb'))
     return data
 
 

@@ -76,11 +76,12 @@ def show_predict_page():
         else:
             currency = "$"
             salaryConverted = int(salary[0])
+        st.balloons()
         st.subheader(
             f"The estimated salary is {currency} {salaryConverted}")
         st.write("Inputs :", inputs)
         st.success('Are you satisfied with the results ?', icon="😃")
-        success = st.button("Yes ✅")
+        successButton = st.button("Yes ✅")
         fail = st.button("No 😳")
-        if (success):
+        if successButton :
             st.balloons()
